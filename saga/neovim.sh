@@ -25,7 +25,9 @@ git checkout v$version
 module purge &> /dev/null
 module add CMake/3.12.1
 
-# compilers, linker path, recent git (default is from 2013)
+# compilers, linker path, recent git (as of Neovim 0.8.3 some dependency builds
+# override CFLAGS, hence we pass the -B flag directly to CC variable; building
+# deps has been completely reworked in the development version though).
 # module add CMake/3.20.1-GCCcore-10.3.0
 # module add git/2.32.0-GCCcore-10.3.0-nodocs
 export CC="/cluster/software/GCCcore/10.3.0/bin/gcc \
