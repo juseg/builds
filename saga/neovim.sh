@@ -5,7 +5,7 @@
 # -- Prepare -----------------------------------------------------------------
 
 # variables
-version="0.8.3"
+version="0.9.1"
 arch="saga-gnu"
 
 # paths
@@ -23,18 +23,12 @@ git checkout v$version
 
 # cmake (this module does not load any gcc libs)
 module purge &> /dev/null
-module add CMake/3.12.1
+module add CMake/3.18.4
 
-# compilers, linker path, recent git (as of Neovim 0.8.3 some dependency builds
-# override CFLAGS, hence we pass the -B flag directly to CC variable; building
-# deps has been completely reworked in the development version though).
-# module add CMake/3.20.1-GCCcore-10.3.0
-# module add git/2.32.0-GCCcore-10.3.0-nodocs
-export CC="/cluster/software/GCCcore/10.3.0/bin/gcc \
-    -B/cluster/software/binutils/2.36.1-GCCcore-10.3.0/bin/"
-export CXX=/cluster/software/GCCcore/10.3.0/bin/g++
-export PATH="/cluster/software/git/2.32.0-GCCcore-10.3.0-nodocs/bin:$PATH"
+# compiler paths
+export CC="/cluster/software/GCCcore/11.3.0/bin/gcc"
+export CXX="/cluster/software/GCCcore/11.3.0/bin/g++"
 
 # configure and make install
-# make distclean
+make distclean
 make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=$prefix install

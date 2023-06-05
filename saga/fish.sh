@@ -5,7 +5,7 @@
 # -- Prepare ------------------------------------------------------------------
 
 # variables (this is the last C++ version not requiring rust)
-version="3.6.0"
+version="3.6.1"
 arch="saga-gnu"
 
 # paths
@@ -26,16 +26,12 @@ module purge &> /dev/null
 module add CMake/3.12.1
 
 # compilers and linker path (need gcc >= 11)
-# module add CMake/3.24.3-GCCcore-12.2.0
-# module add ncurses/6.3-GCCcore-12.2.0
-export CC="/cluster/software/GCCcore/12.2.0/bin/gcc"
-export CXX="/cluster/software/GCCcore/12.2.0/bin/g++"
-export CFLAGS="-B/cluster/software/binutils/2.39-GCCcore-12.2.0/bin/"
-export CXXFLAGS=$CFLAGS
+export CC="/cluster/software/GCCcore/11.3.0/bin/gcc"
+export CXX="/cluster/software/GCCcore/11.3.0/bin/g++"
 
 # configure and make install
-CURSES_ROOT="/cluster/software/ncurses/6.3-GCCcore-12.2.0/"
-rm -rf build
+CURSES_ROOT="/cluster/software/ncurses/6.3-GCCcore-11.3.0/"
+make clean
 mkdir -p build; cd build
 cmake .. \
     -DCMAKE_VERBOSE_MAKEFILE=True \
